@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Percent({ array, amount }) {
+function Percent({ elems, amount }) {
 
-	const total = array.reduce((sum, current) => {
+	const total = elems.reduce((sum, current) => {
 		return sum + Number(current.amount);
 	}, 0)
 

@@ -2,26 +2,25 @@ import React from 'react';
 import Percent from './Percent';
 import ChartElemData from './ChartElemData';
 
-function ChartElem({ category, editElem, deleteElem }) {
-	
-	if (category.length === 0) {
-		return <div className='chart__elems'>No add items</div>
+function ChartElem({ elems, actions }) {
+
+	if (elems.length === 0) {
+		return <div className='chart__elems no_items'>No add items</div>
 	}
 
 	return (
 		<div className='chart__elems'>
 			<ul>
-				{category.map(({ title, amount }, index, array) => (
-					<li key={title}>
+				{elems.map(({ id, title, amount }) => (
+					<li key={id}>
 						<ChartElemData
-							editElem={editElem}
-							deleteElem={deleteElem}
+							elems={elems}
+							actions={actions}
+							id={id}
 							title={title}
 							amount={amount}
-							category={category}
-							index={index}
 						/>
-						<Percent array={array} amount={amount} />
+						<Percent elems={elems} amount={amount} />
 					</li>
 				))}
 			</ul>

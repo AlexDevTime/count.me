@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import './App.css';
 import Header from './components/Header';
-import Chart from './components/Chart'
+import Profile from './components/Profile';
+import Chart from './components/Chart';
+import rootReducer from './reducers/rootReducer'
+
+const initialState = {
+  elems: [],
+  sortOption: 'unsorted',
+}
 
 function App() {
   const [name, setName] = useState('');
-  const [income, setIncome] = useState([]);
-  const [expenses, setExpenses] = useState([]);
+  const [income, incomeDispatch] = useReducer(rootReducer, JSON.parse(localStorage.getItem('income')) || { ...initialState });
+  const [expenses, expensesDispatch] = useReducer(rootReducer, JSON.parse(localStorage.getItem('expenses')) || { ...initialState });
 
-  useEffect(() => {
-    const incomeLocal = localStorage.getItem('income') || '[]';
-    const expensesLocal = localStorage.getItem('expenses') || '[]';
-    setIncome(JSON.parse(incomeLocal));
-    setExpenses(JSON.parse(expensesLocal));
-  }, [])
+  function actions(dispatch) {
+    return {
+      add: (newElem) => dispatch({ type: 'ADD', payload: newElem }),
+      edit: (editedElem) => dispatch({ type: 'EDIT', payload: editedElem }),
+      delete: (id) => dispatch({ type: 'DELETE', payload: id }),
+      sorting: (event) => dispatch({ type: 'SORTING', payload: event.target.value }),
+    }
+  }
 
   useEffect(() => {
     localStorage.setItem('income', JSON.stringify(income));
@@ -23,41 +32,22 @@ function App() {
     localStorage.setItem('expenses', JSON.stringify(expenses));
   }, [expenses])
 
-  const addNewIncome = (newIncome) => setIncome([...income, newIncome]);
-  const addNewExpenses = (newExpenses) => setExpenses([...expenses, newExpenses]);
-
-  const editIncomeElem = (currentIndex, newIncome) => {
-    let newState = [...income];
-    newState[currentIndex] = newIncome;
-    setIncome(newState);
-  }
-
-  const editExpensesElem = (currentIndex, newIncome) => {
-    let newState = [...expenses];
-    newState[currentIndex] = newIncome;
-    setExpenses(newState);
-  }
-
-  const deleteIncomeElem = (currentIndex) => setIncome([...income].filter((item, index) => index !== currentIndex))
-  const deleteExpensesElem = (currentIndex) => setExpenses([...expenses].filter((item, index) => index !== currentIndex))
-  
   return (
     <div className="app">
       <Header />
       <div className='wrap'>
+        <Profile />
         <Chart
           chartTitle={'MONTHLY INCOME'}
-          category={income}
-          saveElem={addNewIncome}
-          editElem={editIncomeElem}
-          deleteElem={deleteIncomeElem}
+          elems={income.elems}
+          sortOption={income.sortOption}
+          actions={actions(incomeDispatch)}
         />
         <Chart
           chartTitle={'MONTHLY EXPENSES'}
-          category={expenses}
-          saveElem={addNewExpenses}
-          editElem={editExpensesElem}
-          deleteElem={deleteExpensesElem}
+          elems={expenses.elems}
+          sortOption={expenses.sortOption}
+          actions={actions(expensesDispatch)}
         />
       </div>
     </div>

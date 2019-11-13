@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 
-function InputElem({saveElem, editElem, changeActiveInput, index, category}) {
-	
-	const [inputTitle, setInputTitle] = useState(editElem !== undefined ? category[index].title : '');
-	const [inputAmount, setInputAmount] = useState(editElem !== undefined ? category[index].amount : '');
+function InputElem({ addElem, editElem, changeActiveInput, id, title, amount }) {
+
+	const [inputTitle, setInputTitle] = useState(editElem !== undefined ? title : '');
+	const [inputAmount, setInputAmount] = useState(editElem !== undefined ? amount : '');
 
 	const inputTitleHandler = (event) => setInputTitle(event.target.value);
 	const inputAmountHandler = (event) => setInputAmount(event.target.value);
 
+	const newElem = {
+		id: Math.floor(Math.random() * 10000),
+		title: inputTitle,
+		amount: inputAmount,
+	};
+
 	const addSave = () => {
-		editElem !== undefined ? 
-		editElem (index, {title: inputTitle, amount: inputAmount}) :
-		saveElem({title: inputTitle, amount: inputAmount});
-		changeActiveInput();
+		editElem !== undefined ?
+			editElem({ id, title: inputTitle, amount: inputAmount })
+			: addElem(newElem);
+			changeActiveInput();
 	}
+
 	return (
 		<>
 			<input type='text' value={inputTitle} placeholder='Enter title' onChange={inputTitleHandler} />

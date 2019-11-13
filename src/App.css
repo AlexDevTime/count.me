@@ -32,7 +32,7 @@ header {
   padding: 21px;
   font-family: 'Segoe UI';
   font-size: 17px;
-  color:#484848;
+  color: #484848;
 }
 
 .chart__title {
@@ -42,6 +42,7 @@ header {
   text-align: center;
   border-bottom: 2px solid #484848;
   letter-spacing: 2px;
+  margin-bottom: 14px;
 }
 
 .income .chart__title {
@@ -54,20 +55,58 @@ header {
   border-bottom-color: #d17979;
 }
 
-.chart__elems{}
+.chart__elems.no_items {
+  padding-bottom: 20px;
+}
 
-.chart__elems ul li{display:block;width:100%;padding-bottom:20px;}
+.chart__elems ul li {
+  display: block;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.profile {
+  padding: 21px;
+  font-family: Tahoma;
+  font-size: 21px;
+  color: #000;
+  overflow: auto;
+}
+
+.profile_photo {
+  float: left;
+  margin:10px 21px 10px 0;
+  font-size: 0;
+}
+
+.profile_photo img{
+  padding:2px;
+  border:1px solid #b4b4b4;
+}
+
+.profile_text {
+  margin-top:21px;
+  line-height: 36px;
+}
+
+.profile_name {
+  color: #0589a9;
+}
+
+.profile_amount {
+  color: #7da915;
+}
 
 .percent {
-  line-height:35px;
+  line-height: 35px;
   font-size: 14px;
 }
 
 .percent span {
-  float:left;
+  float: left;
   display: block;
   height: 35px;
-  margin-right:5px;
+  margin-right: 5px;
 }
 
 .income .percent {
@@ -86,6 +125,10 @@ header {
 .expenses .percent span {
   background-color: #ffedad;
   border: 1px solid #e3ce84;
+}
+
+.sorting {
+  padding-bottom: 20px;
 }
 
 @media (max-width: 723px) {}
