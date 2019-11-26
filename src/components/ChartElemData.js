@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import InputElem from './InputElem';
+import edit_img from '../img/edit.png';
+import delete_img from '../img/delete.png';
 
-function ChartElemData({ actions, elems, id, title, amount }) {
+function ChartElemData({ actions, id, title, amount }) {
 
 	const [activeEdit, setActiveEdit] = useState(false);
 
@@ -14,8 +16,8 @@ function ChartElemData({ actions, elems, id, title, amount }) {
 				:
 				<>
 					{title} - {amount}&nbsp;
-					<img src='edit.png' title='Edit' alt='edit' onClick={changeActiveEdit} />&nbsp;
-					<img src='delete.png' title='Delete' alt='delete' onClick={() => actions.delete(id)} />
+					<img src={edit_img} title='Edit' alt='edit' onClick={changeActiveEdit} />&nbsp;
+					<img src={delete_img} title='Delete' alt='delete' onClick={() => actions.delete(id)} />
 				</>
 			}
 		</>

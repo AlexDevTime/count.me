@@ -1,5 +1,15 @@
+body, div, h1, h2, h3, a, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #fff;
+  font-family: Tahoma;
+}
+
+ul {
+  list-style: none;
 }
 
 header {
@@ -12,9 +22,9 @@ header {
 .logo {
   float: left;
   margin-left: 21px;
-  margin-top: 16px;
-  font-family: 'Agency FB';
-  font-size: 42px;
+  margin-top: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 38px;
   letter-spacing: 3px;
   color: #fff;
 }
@@ -23,9 +33,76 @@ header {
   color: #343434;
 }
 
+.menu {
+  float: right;
+  margin-top: 37px;
+  margin-right: 21px;
+}
+
+.menu_icon {
+  width: 26px;
+  height: 17px;
+  background-image: url('./img/menu_icon.png');
+  cursor: pointer;
+}
+
+.menu_icon_close {
+  background-position: 0 -17px;
+}
+
+.menu_body {
+  margin: 0 auto;
+  display: none;
+}
+
+.menu_body_items {
+  position: absolute;
+  top: 83px;
+  right: 0;
+  width: 100%;
+  padding: 30px 21px;
+  background-color: #b7f2ff;
+  z-index: 1000;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.menu_body_item {
+  color: #3f8fa7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.menu_body_item:hover {
+  text-decoration: none;
+}
+
 .wrap {
   margin: 0 auto;
   max-width: 723px;
+  position: relative;
+}
+
+.login_form {
+  padding-top: 34px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.login_form label {
+  font-size: 18px;
+  color: #3f8fa7;
+}
+
+.login_form label span {
+  display: inline-block;
+  min-width: 70px;
+}
+
+.login_form label input {
+  margin: 3px 0 10px;
+  font-size: 16px;
+  width: 200px;
 }
 
 .chart {
@@ -35,7 +112,7 @@ header {
   color: #484848;
 }
 
-.chart__title {
+.chart_title {
   font-family: Tahoma;
   font-size: 21px;
   text-transform: uppercase;
@@ -45,21 +122,21 @@ header {
   margin-bottom: 14px;
 }
 
-.income .chart__title {
+.income .chart_title {
   color: #7da915;
   border-bottom-color: #7da915;
 }
 
-.expenses .chart__title {
+.expenses .chart_title {
   color: #d17979;
   border-bottom-color: #d17979;
 }
 
-.chart__elems.no_items {
+.chart_elems.no_items {
   padding-bottom: 20px;
 }
 
-.chart__elems ul li {
+.chart_elems ul li {
   display: block;
   width: 100%;
   padding-bottom: 20px;
@@ -75,17 +152,19 @@ header {
 
 .profile_photo {
   float: left;
-  margin:10px 21px 10px 0;
+  margin: 10px 21px 10px 0;
   font-size: 0;
+  width: 104px;
+  height: 104px;
 }
 
-.profile_photo img{
-  padding:2px;
-  border:1px solid #b4b4b4;
+.profile_photo img {
+  padding: 2px;
+  border: 1px solid #b4b4b4;
 }
 
 .profile_text {
-  margin-top:21px;
+  margin-top: 11px;
   line-height: 36px;
 }
 
@@ -93,8 +172,12 @@ header {
   color: #0589a9;
 }
 
-.profile_amount {
+.profile_income {
   color: #7da915;
+}
+
+.profile_expenses {
+  color: #d17979;
 }
 
 .percent {
@@ -131,4 +214,9 @@ header {
   padding-bottom: 20px;
 }
 
-@media (max-width: 723px) {}
+@media (max-width: 723px) {
+  .logo{
+    font-size:31px;
+    margin-top: 27px
+  }
+}

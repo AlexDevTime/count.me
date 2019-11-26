@@ -18,14 +18,16 @@ function InputElem({ addElem, editElem, changeActiveInput, id, title, amount }) 
 		editElem !== undefined ?
 			editElem({ id, title: inputTitle, amount: inputAmount })
 			: addElem(newElem);
-			changeActiveInput();
+		changeActiveInput();
 	}
+
+	const checkLength = () => inputTitle.length === 0 || inputAmount.length === 0 ? true : false;
 
 	return (
 		<>
-			<input type='text' value={inputTitle} placeholder='Enter title' onChange={inputTitleHandler} />
+			<input type='text' value={inputTitle} placeholder='Enter title' onChange={inputTitleHandler} autoFocus />
+			<button type='button' disabled={checkLength()} onClick={addSave}>Save</button><br />
 			<input type='number' value={inputAmount} placeholder='Enter amount' onChange={inputAmountHandler} />
-			<button type='button' onClick={addSave}>Save</button>
 			<button type='button' onClick={changeActiveInput}>Сancel</button>
 		</>
 	);

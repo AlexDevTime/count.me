@@ -1,6 +1,7 @@
 import React from 'react';
+import Menu from './Menu';
 
-function Header() {
+function Header(props) {
 	return (
 		<header>
 			<div className='wrap'>
@@ -9,6 +10,7 @@ function Header() {
 					Count<span>.me</span>
 				</div>
 
+				<Menu />
 			</div>
 		</header>
 	);

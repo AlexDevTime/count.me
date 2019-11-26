@@ -3,17 +3,22 @@ import './App.css';
 import Header from './components/Header';
 import Profile from './components/Profile';
 import Chart from './components/Chart';
-import rootReducer from './reducers/rootReducer'
+import rootReducer from './reducers/rootReducer';
+import LoginForm from './components/LoginForm';
 
 const initialState = {
   elems: [],
   sortOption: 'unsorted',
 }
 
+const parseIncome = JSON.parse(localStorage.getItem('income'))
+const parseExpenses = JSON.parse(localStorage.getItem('expenses'))
+const parseName = JSON.parse(localStorage.getItem('name'));
+
 function App() {
-  const [name, setName] = useState('');
-  const [income, incomeDispatch] = useReducer(rootReducer, JSON.parse(localStorage.getItem('income')) || { ...initialState });
-  const [expenses, expensesDispatch] = useReducer(rootReducer, JSON.parse(localStorage.getItem('expenses')) || { ...initialState });
+  const [name, setName] = useState(parseName === null ? '' : parseName);
+  const [income, incomeDispatch] = useReducer(rootReducer, parseIncome === null ? { ...initialState } :  parseIncome);
+  const [expenses, expensesDispatch] = useReducer(rootReducer, parseExpenses === null ? { ...initialState } : parseExpenses);
 
   function actions(dispatch) {
     return {
@@ -23,6 +28,10 @@ function App() {
       sorting: (event) => dispatch({ type: 'SORTING', payload: event.target.value }),
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem('name', JSON.stringify(name));
+  }, [name])
 
   useEffect(() => {
     localStorage.setItem('income', JSON.stringify(income));
@@ -36,19 +45,33 @@ function App() {
     <div className="app">
       <Header />
       <div className='wrap'>
-        <Profile />
-        <Chart
-          chartTitle={'MONTHLY INCOME'}
-          elems={income.elems}
-          sortOption={income.sortOption}
-          actions={actions(incomeDispatch)}
-        />
-        <Chart
-          chartTitle={'MONTHLY EXPENSES'}
-          elems={expenses.elems}
-          sortOption={expenses.sortOption}
-          actions={actions(expensesDispatch)}
-        />
+        {!name ?
+          <LoginForm 
+            name={name} 
+            setName={setName} 
+            actions={actions(incomeDispatch)} 
+          />
+          :
+          <>
+            <Profile
+              name={name}
+              income={income.elems}
+              expenses={expenses.elems}
+            />
+            <Chart
+              chartTitle={'MONTHLY INCOME'}
+              elems={income.elems}
+              sortOption={income.sortOption}
+              actions={actions(incomeDispatch)}
+            />
+            <Chart
+              chartTitle={'MONTHLY EXPENSES'}
+              elems={expenses.elems}
+              sortOption={expenses.sortOption}
+              actions={actions(expensesDispatch)}
+            />
+          </>
+        }
       </div>
     </div>
   );

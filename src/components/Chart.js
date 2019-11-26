@@ -3,7 +3,7 @@ import ChartElems from './ChartElems';
 import AddButton from './AddButton';
 import SortingSelector from './SortingSelector';
 
-function Chart({ chartTitle, elems, sortOption, actions, selectedOption, selectedHandler }) {
+function Chart({ chartTitle, elems = [], sortOption, actions, selectedOption, selectedHandler }) {
 
 	let sortedElems = [];
 
@@ -33,7 +33,7 @@ function Chart({ chartTitle, elems, sortOption, actions, selectedOption, selecte
 
 	return (
 		<div className={`chart ${chartClass}`}>
-			<div className='chart__title'>{chartTitle}</div>
+			<div className='chart_title'>{chartTitle}</div>
 			<SortingSelector sortOption={sortOption} actions={actions} />
 			<ChartElems elems={sortedElems} actions={actions} />
 			<AddButton elems={elems} actions={actions} />

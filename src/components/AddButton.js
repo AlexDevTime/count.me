@@ -11,7 +11,7 @@ function AddButton({ elems, actions }) {
 			<form>
 				{activeInput ?
 					<InputElem elems={elems} addElem={actions.add} changeActiveInput={changeActiveInput} />
-					: <button onClick={changeActiveInput}>Add</button>}
+					: <button onClick={changeActiveInput}>Add new</button>}
 			</form>
 		</div>
 	);

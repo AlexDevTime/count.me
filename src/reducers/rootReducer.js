@@ -1,4 +1,5 @@
 function rootReducer(state, action) {
+	
 	switch (action.type) {
 		case 'ADD':
 			return Object.assign({}, state, { elems: [...state.elems, action.payload] });
